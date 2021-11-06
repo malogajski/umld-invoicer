@@ -14,7 +14,7 @@ class AddHostToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('host_id')->references('id')->on('hosts');
+            $table->foreignId('host_id')->after('id')->nullable()->references('id')->on('hosts');
         });
     }
 
@@ -26,7 +26,7 @@ class AddHostToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn('host_id');
         });
     }
 }

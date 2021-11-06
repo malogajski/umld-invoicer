@@ -14,7 +14,7 @@ class AddHostToAssociatesTable extends Migration
     public function up()
     {
         Schema::table('associates', function (Blueprint $table) {
-            //
+            $table->foreignId('host_id')->after('id')->nullable()->references('id')->on('hosts');
         });
     }
 
