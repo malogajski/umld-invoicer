@@ -12,5 +12,8 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/dropzone.js', 'public/js')
+    .css('resources/css/sidebar.css', 'public/css')
+    .css('resources/css/dropzone.css', 'public/css')
     .sass('resources/sass/app.scss', 'public/css')
     .sourceMaps();

@@ -46,7 +46,9 @@
 
                             @endforeach
                             <tr>
-                                <td colspan="6" class="text-right" style="font-weight: bold">{{ number_format($invoice->sum('total_amount'), 2) }}</td>
+                                <td colspan="6" class="text-right" style="font-weight: bold">
+                                  @if(isset($invoice))  {{ number_format($invoice->sum('total_amount'), 2) }} @endif
+                                </td>
                             </tr>
                         </table>
                             <div class="d-flex justify-content-center pagination">

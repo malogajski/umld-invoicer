@@ -7,6 +7,8 @@
             <div class="card">
                 <div class="card-header">Products</div>
 
+                @include('comon.flash-messages')
+
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">

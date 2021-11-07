@@ -1,84 +1,161 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.88.1">
-    <title>Dashboard Template · Bootstrap v5.1</title>
+<header>
+        <div class="wrapper">
+            <nav class="navbar">
+                <input type="checkbox" id="show-search">
+                <input type="checkbox" id="show-menu">
+                <label for="show-menu" class="menu-icon"><i class="fas fa-bars"></i></label>
+                <div class="content">
+                    <div class="logo"><a href="#">umld:inv</a></div>
+                    <ul class="links">
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
+                        <li><a href="{{ route('home') }}">Home</a></li>
 
-    <!-- Bootstrap core CSS -->
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+                        <li>
+                            <a href="#" class="desktop-link">Invoices</a>
+                            <ul>
+                                <li><a href="{{ route('home') }}">Show All</a></li>
+                                <li><a href="{{ route('invoices.create') }}">Create new</a></li>
+                            </ul>
+                        </li>
 
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
+                        <li>
+                            <a href="#" class="desktop-link">Codebooks</a>
+                            <ul>
+                                <li>
+                                    <a href="#" class="desktop-link">Products</a>
+                                    <input type="checkbox" id="products">
+                                    <label for="products">Products</label>
+                                    <ul>
+                                        <li><a href="{{ route('products.index') }}">Show All</a></li>
+                                        <li><a href="{{ route('products.create') }}">Create new</a></li>
+                                    </ul>
+                                </li>
 
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
+                                <li>
+                                    <a href="#" class="desktop-link">Associates</a>
+                                    <input type="checkbox" id="associates">
+                                    <label for="associates">Associates</label>
+                                    <ul>
+                                        <li><a href="{{ route('associates.index') }}">Show All</a></li>
+                                        <li><a href="{{ route('associates.create') }}">Create new</a></li>
+                                    </ul>
+                                </li>
 
+                            </ul>
+                        </li>
 
-    <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
-</head>
-<body>
+                        <li>
+                            <a href="#" class="desktop-link">Admin</a>
+                            <input type="checkbox" id="show-services">
+                            <label for="show-services">Services</label>
+                            <ul>
+                                <li><a href="{{ route('create.host') }}">Host</a></li>
+                                <li><a href="{{ route('show.users') }}">Users</a></li>
+                                <li><a href="#">Drop Menu 3</a></li>
+                                <li>
+                                    <a href="#" class="desktop-link">More Items</a>
+                                    <input type="checkbox" id="show-items">
+                                    <label for="show-items">More Items</label>
+                                    <ul>
+                                        <li><a href="#">Sub Menu 1</a></li>
+                                        <li><a href="#">Sub Menu 2</a></li>
+                                        <li><a href="#">Sub Menu 3</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                        @endif
 
-<div class="container-fluid">
-    <div class="row">
-        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block card-header sidebar collapse">
-            <div class="position-sticky pt-3">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}">
-                            <span data-feather="home"><i class="fas fa-file-invoice"></i></span>
-                            Invoices
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('associates.index') }}">
-                            <span data-feather="file"><i class="fas fa-handshake"></i></span>
-                            Customers
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('products.index') }}">
-                            <span data-feather="shopping-cart"><i class="fas fa-clipboard-list"></i></span>
-                            Products
-                        </a>
-                    </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                    @else
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="bar-chart-2"><i class="fas fa-coins"></i></span>
-                            Reports
-                        </a>
-                    </li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
 
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
                 </ul>
+                <label for="show-search" class="search-icon"><i class="fas fa-search"></i></label>
+                <form action="#" class="search-box">
+                    <input type="text" placeholder="Type Something to Search..." required>
+                    <button type="submit" class="go-icon"><i class="fas fa-long-arrow-alt-right"></i></button>
+                </form>
+            </nav>
+        </div>
+</header>
 
-            </div>
-        </nav>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            @yield('content')
-        </main>
-    </div>
-</div>
 
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+{{--<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block card-header sidebar collapse">--}}
+{{--    <div class="position-sticky pt-3">--}}
+{{--        <ul class="nav flex-column">--}}
+{{--            <li class="nav-item">--}}
 
-<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
-</body>
-</html>
+{{--                <a href="#" class="nav-fill">{{ trans('sidebar.invoices') }}</a>--}}
+{{--                <ul>--}}
+{{--                    <li><a class="nav-link active" aria-current="page" href="{{ route('home') }}">--}}
+{{--                            <i class="fas fa-file-invoice mr-1"></i>--}}
+{{--                            {{ trans('sidebar.all') }}--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li>--}}
+{{--                        <a class="nav-link" href="{{route('invoices.create')}}">--}}
+{{--                            <i class="fas fa-file-invoice mr-1"></i>--}}
+{{--                            {{ trans('sidebar.new') }}--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
+{{--            <li class="nav-item">--}}
+{{--                <a class="nav-link" href="{{ route('associates.index') }}">--}}
+{{--                    <span data-feather="file"><i class="fas fa-handshake"></i></span>--}}
+{{--                    Customers--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--            <li class="nav-item">--}}
+{{--                <a class="nav-link" href="{{ route('products.index') }}">--}}
+{{--                    <span data-feather="shopping-cart"><i class="fas fa-clipboard-list"></i></span>--}}
+{{--                    Products--}}
+{{--                </a>--}}
+{{--            </li>--}}
+
+{{--            <li class="nav-item">--}}
+{{--                <a class="nav-link" href="#">--}}
+{{--                    <span data-feather="bar-chart-2"><i class="fas fa-coins"></i></span>--}}
+{{--                    Reports--}}
+{{--                </a>--}}
+{{--            </li>--}}
+
+{{--        </ul>--}}
+
+{{--    </div>--}}
+{{--</nav>--}}

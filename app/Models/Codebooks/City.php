@@ -14,6 +14,17 @@ class City extends Model
 
     protected $fillable = [
         'name',
-        'postcode'
+        'postcode',
+        'state_id',
+        'country'
     ];
+
+    protected $appends = [
+        'state',
+    ];
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
 }

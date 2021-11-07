@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\HostController;
+use App\Http\Controllers\Admin\MiscellaneousController;
 use App\Http\Controllers\Codebooks\Associates\AssociateController;
+use App\Http\Controllers\Codebooks\CityController;
 use App\Http\Controllers\CodeBooks\Products\ProductController;
+use App\Http\Controllers\Codebooks\StateController;
 use App\Http\Controllers\Invoices\InvoicesController;
 use App\Http\Controllers\Invoices\InvoicesDetailController;
 use App\Http\Controllers\TestController;
@@ -28,7 +32,16 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
+    // Admin
+    Route::get('create-host', [HostController::class, 'create'])->name('create.host');
+    Route::post('store-host', [HostController::class, 'store'])->name('store.host');
+    Route::post('files/destroy', [MiscellaneousController::class, 'removeTemporaryImage']);
 
+    Route::get('users', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('show.users');
+    Route::get('users/{id}', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('edit.user');
+    Route::post('users/{id}/update', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('update.user');
+    Route::post('users/{id}/store', [\App\Http\Controllers\Admin\UserController::class, 'store'])->name('store.user');
+    Route::delete('users/{id}/delete', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('delete.user');
     // Invoices
     Route::resource('invoices', InvoicesController::class);
     Route::get('invoices/{invoice_id}/download', [InvoicesController::class, 'download'])->name('invoices.download');
@@ -37,8 +50,7 @@ Route::middleware(['auth'])->group(function () {
     // Codebooks
     Route::resource('products', ProductController::class);
     Route::resource('associates', AssociateController::class);
+    Route::get('cities', [CityController::class, 'index'])->name('cities.index');
+    Route::get('states', [StateController::class, 'index'])->name('states.index');
 
-    // Test
-    Route::get('test', [TestController::class, 'test']);
-    Route::post('test.index', [TestController::class, 'index'])->name('test.index');
 });

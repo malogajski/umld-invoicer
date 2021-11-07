@@ -48,12 +48,13 @@ class InvoicesController extends Controller
      */
     public function store(Request $request)
     {
-        $arr = $request->all();
-
         $invoice_id = $request->invoice['id'] ?? null;
 
         if (!$invoice_id) {
-            $invoice = Invoice::create($request->invoice + ['user_id' => auth()->id()]);
+            $invoice = Invoice::create($request->invoice
+                + ['user_id' => auth()->id()]
+                + ['host_id' => auth()->user()->host_id]
+            );
             $invoice_id = $invoice->id;
         } else {
             $invoice = Invoice::find($invoice_id)->update($request->invoice + ['user_id' => auth()->id()]);
@@ -67,6 +68,7 @@ class InvoicesController extends Controller
                 $details = InvoiceDetail::where('parent_id', $invoice_id)->where('product_id', $invoice_details['product_id'][$i])->first();
 
                 $data = [
+                    'host_id'           => auth()->user()->host_id,
                     'parent_id'         => $invoice_id,
                     'product_id'        => $invoice_details['product_id'][$i],
                     'quantity'          => $invoice_details['quantity'][$i],

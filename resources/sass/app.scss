@@ -1,9 +1,3 @@
-// Font-Awesome
-@import '~@fortawesome/fontawesome-free/scss/brands';
-@import '~@fortawesome/fontawesome-free/scss/regular';
-@import '~@fortawesome/fontawesome-free/scss/solid';
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
-
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
@@ -12,3 +6,350 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+//@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Red+Hat+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap');
+
+//@import '~bootstrap/scss/bootstrap';
+//@import '~@fortawesome/fontawesome-free/scss/brands';
+//@import '~@fortawesome/fontawesome-free/scss/regular';
+//@import '~@fortawesome/fontawesome-free/scss/solid';
+//@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+////@import "~vuetify/dist/vuetify.min.css";
+//@import url('https://fonts.googleapis.com/css?family=Material+Icons');
+//@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
+//@import url('https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css');
+//@import "variables";
+//@import "cards";
+////@import "strengthmeter";
+////@import "settings";
+//@import "forms";
+////@import "wizzard";
+//@import "tables";
+////@import "modal";
+////@import "sidebar";
+////@import "searchbox";
+//
+//
+//:root {
+//    --avatar-size: $circleSize;
+//}
+//
+//html {
+//    height: 100vh;
+//    background-color: $generalBackground;
+//
+//    body {
+//        background-color: $generalBackground;
+//        margin: 0;
+//        min-height: 100vh;
+//        font-family: Tahoma, sans-serif;
+//
+//        select,
+//        select:active,
+//        textarea:hover,
+//        input:hover,
+//        textarea:active,
+//        input:active,
+//        textarea:focus,
+//        input:focus,
+//        button:focus,
+//        button:active,
+//        button:hover,
+//        label:focus,
+//        .btn:active,
+//        .btn.active
+//        {
+//            outline:0 !important;
+//            -webkit-appearance:none;
+//            box-shadow: none !important;
+//        }
+//
+//        a.btn, input[type=button].btn, input[type=submit].btn {
+//
+//            &.btn-info {
+//                background-color: $clrBlue !important;
+//                border-color: $clrBlue !important;
+//                color: $white !important;
+//            }
+//        }
+//
+//        .hand {
+//            cursor: pointer;
+//        }
+//
+//        h1 {
+//            font-size: 64px;
+//            font-family: $fontIBM;
+//            font-weight: $font-weight-medium;
+//            line-height: normal;
+//
+//            & span {
+//                color: $clrBlue;
+//            }
+//        }
+//
+//        button {
+//
+//            &.form-button {
+//                background: transparent;
+//                color: $clrBlue;
+//                font-weight: $font-weight-medium;
+//                font-size: 16px;
+//                border: 1px solid $clrBlue;
+//                border-radius: 10px;
+//                padding: 5px 20px;
+//                text-transform: uppercase;
+//            }
+//
+//            &.form-button-active {
+//                background-color: $clrBlue;
+//                color: $white;
+//            }
+//
+//            &.add-new-button {
+//                width: 100%;
+//                border: 1px dashed $clrDark;
+//                background-color: $generalBackground;
+//                height: 55px;
+//                font-weight: $font-weight-medium;
+//                display: flex;
+//                justify-content: center;
+//                align-items: center;
+//            }
+//
+//            &.add-new-button:hover {
+//                cursor: pointer;
+//            }
+//        }
+//
+//        .errormessage {
+//            color: $errorColor;
+//            font-size: 0.6rem;
+//        }
+//
+//        .background-transparent {
+//            background: transparent !important;
+//        }
+//    }
+//}
+//
+//#navBar {
+//    font-family: $fontIBM;
+//    background-color: rgba(255,255,255,0.4);
+//    box-shadow: 0 7px 10px 1px rgb(0,0,0,20%);
+//
+//    .nav-item-right-text {
+//        font-size: 12px;
+//    }
+//
+//    .dropdown-menu {
+//        width: 220px;
+//    }
+//
+//    .burgermenu, .navbar-nav .nav-item a {
+//        color: $black;
+//        font-size: 14px;
+//        font-weight: 700;
+//    }
+//
+//    .nav-item-signup-button {
+//        padding-right: 20px;
+//        padding-left: 20px;
+//        border-radius: 20px;
+//    }
+//
+//    .search-form {
+//        border-radius: 30px 0 0 30px;
+//        height: 32px;
+//        font-size: 0.8rem;
+//    }
+//
+//    .search-btn {
+//        border-radius: 0 30px 30px 0;
+//        cursor:pointer;
+//        border: 1px solid #ced4da;
+//        height: 32px;
+//        font-size: 0.8rem;
+//    }
+//
+//    ul#primaryNav {
+//        font-size: 0.9rem;
+//        text-transform: uppercase;
+//
+//        li {
+//            margin-left: 30px;
+//        }
+//    }
+//
+//    .header-avatar {
+//        padding: 22px 0;
+//        text-align: center;
+//        width: 73px;
+//
+//        .circle {
+//            border-radius: 50%;
+//            text-align: center;
+//            cursor: pointer;
+//            width: 40px;
+//            height: 40px;
+//            background-color: $clrBlue;
+//            padding: 10px;
+//
+//            .initials {
+//                padding: 0;
+//                text-decoration: none;
+//                font-family: $fontRHD;
+//                font-size: 1.2rem; /*calc(var(--avatar-size) / 1.2); /* 50% of parent */
+//                /* font-weight: bold; */
+//                line-height: $circleSize;
+//                position: relative;
+//                top: calc(var(--avatar-size) / 4); /* 25% of parent */
+//
+//                &:after {
+//                    display: none;
+//                }
+//            }
+//        }
+//    }
+//
+//    .header-avatar-active {
+//        background-color: $lightBlue;
+//    }
+//
+//    a.btn {
+//        display: none;
+//    }
+//
+//    &.nologin {
+//
+//        .circle {
+//            display: none;
+//        }
+//
+//        .navbar-brand, .burgermenu {
+//            margin-right: 35px;
+//        }
+//
+//        a.btn {
+//
+//            display: inline-block;
+//
+//            &.btn-dark {
+//                background-color: $clrDark;
+//                border-color: $clrDark;
+//                border-radius: 30px;
+//            }
+//
+//            &.btn-info {
+//                background-color: $clrBlue;
+//                border-color: $clrBlue;
+//                border-radius: 30px;
+//                color: $white;
+//                /* margin-right: 100px; */
+//            }
+//
+//            text-transform: uppercase;
+//            font-size: 0.7rem;
+//            margin-left: 8px;
+//        }
+//    }
+//}
+//
+//.flexcontainer {
+//    position: relative;
+//    /* display: flex; */
+//    flex-wrap: nowrap;
+//    height: 100vh;
+//    height: -webkit-fill-available;
+//    max-height: 100vh;
+//    overflow-x: auto;
+//    overflow-y: auto;
+//    /* margin: 0 118px 220px 2px; */
+//    padding: 40px 0 0 0;
+//
+//    .content {
+//        padding-top: 2rem;
+//        overflow-y: scroll;
+//        padding-right: 7.5rem;
+//        padding-bottom: 14rem;
+//
+//        &.nosidebar {
+//            padding-right: 0;
+//        }
+//    }
+//}
+//
+//#footer, .footer {
+//    font-family: $fontIBM;
+//    background-color: $darkElementBg;
+//    width: 100%;
+//    margin-top: 30px;
+//    height: auto;
+//    position: inherit !important;
+//
+//    h6 {
+//        font-size: 0.8rem;
+//        margin: 0 0 4px 0;
+//        padding: 0;
+//        font-weight: normal;
+//    }
+//
+//    .social {
+//        h6 {
+//            font-size: 0.8rem;
+//            margin-bottom: 8px;
+//            font-weight: normal;
+//        }
+//
+//        .social-links {
+//            a {
+//                padding-right: 3px;
+//            }
+//
+//            margin-bottom: 15px;
+//        }
+//
+//        p {
+//            margin: 0;
+//            font-size: 0.8rem;
+//            font-weight: lighter;
+//
+//            &.bold {
+//                font-weight: normal;
+//            }
+//        }
+//    }
+//
+//    ul {
+//
+//        text-decoration: none;
+//        list-style-type: none;
+//        padding-left: 0;
+//        font-size: 0.8rem;
+//
+//        li {
+//
+//            a {
+//                font-weight: lighter;
+//                color: $white;
+//                text-decoration: none;
+//            }
+//        }
+//    }
+//
+//    a {
+//        color: $white;
+//        text-decoration: underline;
+//    }
+//}
+//
+//html.solo {
+//    height: 100vh;
+//
+//    body {
+//        background-image: linear-gradient(to bottom right, $gradientStart 0%, $gradientEnds 100%);
+//    }
+//    input {
+//        border: none !important;
+//    }
+//}
