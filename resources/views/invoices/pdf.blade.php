@@ -92,7 +92,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach ($invoice->invoice_items as $key => $item)
+                                        @foreach ($invoice->details as $key => $item)
                                             <tr id='addr0'>
                                                 {{--                                        @dd($item)--}}
                                                 <td class="text-center">{{ $loop->iteration }}</td>
@@ -116,15 +116,15 @@
                                             <tbody>
                                             <tr>
                                                 <th class="text-left" width="60%">Sub Total ({{ config('invoices.currency') }})</th>
-                                                <td class="text-right">{{ number_format($invoice->invoice_sub_total, 2) }}</td>
+                                                <td class="text-right">{{ number_format($invoice->sub_total, 2) }}</td>
                                             </tr>
                                             <tr>
                                                 <th class="text-left">Tax Amount ({{ config('invoices.currency') }})</th>
-                                                <td class="text-right">{{ number_format($invoice->tax_amount, 2) }}</td>
+                                                <td class="text-right">{{ number_format($invoice->tax_total, 2) }}</td>
                                             </tr>
                                             <tr>
                                                 <th class="text-left">Grand Total ({{ config('invoices.currency') }})</th>
-                                                <td class="text-right">{{ number_format($invoice->total_amount, 2) }}</td>
+                                                <td class="text-right">{{ number_format($invoice->total, 2) }}</td>
                                             </tr>
                                             </tbody>
                                         </table>

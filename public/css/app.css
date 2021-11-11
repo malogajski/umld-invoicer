@@ -1,4 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
+@import url(https://fonts.googleapis.com/css?family=Material+Icons);
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900);
+@import url(https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css);
 @charset "UTF-8";
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
@@ -10003,4 +10006,9 @@ h3 {
     color: inherit;
     border-color: #dee2e6;
   }
+}
+@font-face {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: normal;
+  font-style: normal;
 }

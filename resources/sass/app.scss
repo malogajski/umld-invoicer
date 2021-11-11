@@ -7,6 +7,17 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+@import url('https://fonts.googleapis.com/css?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
+@import url('https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css');
+
+@font-face {
+    font-family: "IBM Plex Sans", sans-serif;
+    //src: url('public/fonts/IBMPlexSans-Light.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
 //@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Red+Hat+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap');
 
 //@import '~bootstrap/scss/bootstrap';
@@ -15,9 +26,7 @@
 //@import '~@fortawesome/fontawesome-free/scss/solid';
 //@import '~@fortawesome/fontawesome-free/scss/fontawesome';
 ////@import "~vuetify/dist/vuetify.min.css";
-//@import url('https://fonts.googleapis.com/css?family=Material+Icons');
-//@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
-//@import url('https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css');
+
 //@import "variables";
 //@import "cards";
 ////@import "strengthmeter";

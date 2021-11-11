@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Invoices;
 
+use App\Models\Invoices\Invoice;
 use App\Models\Invoices\InvoiceDetail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -31,7 +32,7 @@ class InvoicesDetailController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,7 +43,7 @@ class InvoicesDetailController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -53,7 +54,7 @@ class InvoicesDetailController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -64,8 +65,8 @@ class InvoicesDetailController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -76,14 +77,23 @@ class InvoicesDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        $item = InvoiceDetail::findOrFail($id);
-        $item->delete();
-        redirect()->back();
-//        return redirect()->route('invoice.create')->with('success', 'Item deleted');
+        $items = InvoiceDetail::findOrFail($id);
+        $items->delete();
+
+        $data = [
+            'tax_total' => InvoiceDetail::where('parent_id', $items->parent_id)->sum('total_tax'),
+            'sub_total' => InvoiceDetail::where('parent_id', $items->parent_id)->sum('total_without_tax'),
+            'total'     => InvoiceDetail::where('parent_id', $items->parent_id)->sum('total'),
+        ];
+
+        Invoice::where('id', $items->parent_id)->update($data);
+
+        return redirect()->back();
     }
+
 }

@@ -37,12 +37,12 @@ class Associate extends Model
 
     protected $casts = [
         'id' => 'integer',
-        'city_id' => 'integer',
-        'state_id' => 'integer',
-        'country_id' => 'integer'
+//        'city_id' => 'integer',
+//        'state_id' => 'integer',
+//        'country_id' => 'integer'
     ];
 
-    protected $appends = [
+    protected $with = [
         'city',
         'state',
         'country'
@@ -67,4 +67,19 @@ class Associate extends Model
     {
         return $this->belongsTo(Host::class);
     }
+
+//    public function getCityAttribute()
+//    {
+//
+//    }
+//
+//    public function getStateAttribute()
+//    {
+//
+//    }
+//
+//    public function getCountryAttribute()
+//    {
+//
+//    }
 }

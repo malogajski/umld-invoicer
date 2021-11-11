@@ -2,6 +2,7 @@
 
 namespace App\Models\Invoices;
 
+use App\Http\Controllers\Invoices\InvoicesDetailController;
 use App\Models\Codebooks\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,9 +14,12 @@ class InvoiceDetail extends Model
 
     protected $guarded = [];
 
-    protected $with = ['products'];
+    protected $with = [
+        'products',
+    ];
 
-    public function products() {
+    public function products()
+    {
         return $this->belongsTo(Product::class, 'product_id');
     }
 }

@@ -19,7 +19,7 @@ class City extends Model
         'country'
     ];
 
-    protected $appends = [
+    protected $with = [
         'state',
     ];
 

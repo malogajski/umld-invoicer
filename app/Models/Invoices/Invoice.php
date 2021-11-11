@@ -13,14 +13,17 @@ class Invoice extends Model
 
     protected $guarded = [];
 
-    protected $with = ['associates'];
+    protected $with = [
+        'associates',
+        'details'
+    ];
 
     public function associates(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Associate::class, 'associate_id');
     }
 
-    public function invoice_items(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function details(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(InvoiceDetail::class, 'parent_id');
     }

@@ -7,6 +7,8 @@ use App\Models\Codebooks\Associate;
 use App\Models\Codebooks\Product;
 use App\Models\Invoices\Invoice;
 use App\Models\Invoices\InvoiceDetail;
+use Illuminate\Support\Facades\DB;
+use PDF;
 use FontLib\TrueType\Collection;
 use Http;
 use Illuminate\Http\Request;
@@ -20,8 +22,8 @@ class InvoicesController extends Controller
      */
     public function index()
     {
-//        $invoices = Invoice::with('customer')->take(2);
-//        return view('home', compact('invoices'));
+        $invoices = Invoice::with('associates')->paginate(5);
+        return view('invoices.index', compact('invoices'));
     }
 
     /**
@@ -31,13 +33,7 @@ class InvoicesController extends Controller
      */
     public function create(Request $request)
     {
-        $associates = Associate::all();
-        $products = Product::all();
-        $associate_id = null;
-        if ($request->input('associate_id')) {
-            $associate_id = $request->input('associate_id');
-        }
-        return view('invoices.create', compact(['associates', 'products', 'associate_id']));
+        return view('invoices.create');
     }
 
     /**
@@ -48,6 +44,7 @@ class InvoicesController extends Controller
      */
     public function store(Request $request)
     {
+//        dd($request->all());
         $invoice_id = $request->invoice['id'] ?? null;
 
         if (!$invoice_id) {
@@ -115,15 +112,12 @@ class InvoicesController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $products = Product::all();
-        $associates = Associate::all();
-        $invoice = Invoice::with('invoice_items', 'associates')->find($id);
-//        dd($invoice);
-        return view('invoices.create', compact(['associates', 'products', 'invoice']));
+        $invoice = Invoice::find($id);
+        return view('invoices.edit', compact('invoice'));
     }
 
     /**
@@ -146,6 +140,11 @@ class InvoicesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::transaction(function () use ($id) {
+            InvoiceDetail::where('parent_id', $id)->delete();
+            Invoice::where('id', $id)->delete();
+        });
+
+        return redirect()->back();
     }
 }

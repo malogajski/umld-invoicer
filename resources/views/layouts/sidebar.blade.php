@@ -13,13 +13,13 @@
                         <li>
                             <a href="#" class="desktop-link">Invoices</a>
                             <ul>
-                                <li><a href="{{ route('home') }}">Show All</a></li>
+                                <li><a href="{{ route('invoices.index') }}">Show All</a></li>
                                 <li><a href="{{ route('invoices.create') }}">Create new</a></li>
                             </ul>
                         </li>
 
                         <li>
-                            <a href="#" class="desktop-link">Codebooks</a>
+                            <a href="#" class="desktop-link">Books</a>
                             <ul>
                                 <li>
                                     <a href="#" class="desktop-link">Products</a>

@@ -18,7 +18,7 @@ class State extends Model
         'country_id'
     ];
 
-    protected $appends = [
+    protected $with = [
         'country'
     ];
 
