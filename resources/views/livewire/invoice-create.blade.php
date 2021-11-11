@@ -74,6 +74,7 @@
                     <thead>
                     <tr>
                         <th>#</th>
+                        <th>PID</th>
                         <th>Product Name</th>
                         <th>Price</th>
                         <th>Quantity</th>
@@ -88,9 +89,14 @@
                     <tbody>
                     @foreach($list as $index => $item)
                         <tr>
-                            <td>{{ $invoice->details ? $item['products']['id'] : $item['product_id']}}</td>
-                            <td>{{ $invoice->details ? $item['products']['name'] : $item['name'] ?? ''}}</td>
-                            <td>{{ $invoice->details ? $item['products']['price'] : $item['price']}}</td>
+                            <td>{{ $item['id'] ?? '' }}</td>
+                            <td>{{ $item['products']['id'] ?? $item['product_id'] ?? ''}}</td>
+                            <td>{{ $item['products']['name'] ?? $item['name'] ?? ''}}</td>
+                            <td>{{  $item['price'] ?? ''}}</td>
+
+{{--                            <td>{{ $invoice->details ? $item['products']['id'] : $item['product_id']}}</td>--}}
+{{--                            <td>{{ $invoice->details ? $item['products']['name'] : $item['name'] ?? ''}}</td>--}}
+{{--                            <td>{{ $invoice->details ? $item['products']['price'] : $item['price']}}</td>--}}
 
                             <td>
                                 <input type="number" placeholder="0.00"   name="list[{{$index}}][quantity]"

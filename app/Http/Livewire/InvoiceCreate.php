@@ -37,6 +37,7 @@ class InvoiceCreate extends Component
 
     public function mount(Invoice $invoice)
     {
+//        dd($invoice);
         $this->invoice = $invoice ?? new Invoice();
         $this->associate_id = $invoice->associate_id ?? null;
         $this->type = $invoice->type ?? null;
@@ -96,17 +97,19 @@ class InvoiceCreate extends Component
     public function selectedProduct($id)
     {
         $product = Product::find($id);
+        $fake_id = count($this->list) ?? 0;
         $this->list[] = [
-            'id'        => $product->id,
-            'name'      => $product->name,
-            'price'     => floatval($product->price),
-            'tax'       => floatval($product->tax),
-            'tax_total' => 0,
-            'sub_total' => 0,
-            'quantity'  => floatval(1),
-            'total'     => floatval($product->price),
+            'id'         => null,
+            'product_id' => $product->id,
+            'name'       => $product->name,
+            'price'      => floatval($product->price),
+            'tax'        => floatval($product->tax),
+            'tax_total'  => 0,
+            'sub_total'  => 0,
+            'quantity'   => floatval(1),
+            'total'      => floatval($product->price),
         ];
-
+//dd($this->list);
         $this->products = [];
         $this->searchProduct = '';
         $this->results = '';
@@ -124,13 +127,30 @@ class InvoiceCreate extends Component
 
     public function removeProduct($index)
     {
+        if (isset($this->list[$index]['id']) && intval($this->list[$index]['id']) > 0) {
+            InvoiceDetail::destroy([$this->list[$index]['id']]);
+        }
         unset($this->list[$index]);
         $this->list = array_values($this->list);
     }
 
+    private function createItems($list_item)
+    {
+        InvoiceDetail::create(
+            [
+                'host_id'           => 1,
+                'parent_id'         => $this->invoice->id,
+                'product_id'        => $list_item['product_id'],
+                'quantity'          => $list_item['quantity'],
+                'price'             => $list_item['price'],
+                'total_without_tax' => $list_item['quantity'] * $list_item['price'],
+                'tax'               => 0,
+                'total'             => $list_item['quantity'] * $list_item['price'],
+            ]);
+    }
+
     public function saveInvoice()
     {
-//        dd($this->list);
         if ($this->invoice) {
 
             Invoice::where('id', $this->invoice->id)->update([
@@ -147,16 +167,23 @@ class InvoiceCreate extends Component
             ]);
 
             foreach ($this->list as $product) {
-//                dd($this->invoice->details);
-                InvoiceDetail::where('parent_id', $this->invoice->id)->update(
-                    [
-                        'product_id'        => $product['product_id'],
-                        'quantity'          => $product['quantity'],
-                        'price'             => $product['price'],
-                        'total_without_tax' => $product['quantity'] * $product['price'],
-                        'tax'               => 0,
-                        'total'             => $product['quantity'] * $product['price'],
-                    ]);
+
+                if ($product['id'] === null) {
+                    $this->createItems($product);
+                    continue;
+                }
+
+                InvoiceDetail::where('id', $product['id'])
+                    ->where('parent_id', $this->invoice->id)
+                    ->update(
+                        [
+                            'product_id'        => $product['product_id'],
+                            'quantity'          => $product['quantity'],
+                            'price'             => $product['price'],
+                            'total_without_tax' => $product['quantity'] * $product['price'],
+                            'tax'               => 0,
+                            'total'             => $product['quantity'] * $product['price'],
+                        ]);
             }
         } else {
 
@@ -187,7 +214,7 @@ class InvoiceCreate extends Component
                     ]);
             }
         }
-
+//        dd('done');
         $this->reset('list', 'associates', 'type', 'number', 'date', 'due_date');
 //        $this->invoiceSaved = true;
     }
