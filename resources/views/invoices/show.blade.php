@@ -10,53 +10,48 @@
                 <div class="card-body">
                     <div class="container">
 
-                        <div class="fow clearfix offset-6 pb-2">
-                            @if (config('invoices.logo_file') != '')
-                                <div class="col-md-12 text-center">
-                                    <img src="{{ config('invoices.logo_file') }}" style="width: 200px; height: auto" />
+                        <div class="grid grid-rows-3 grid-flow-col gap-3">
+{{--                            Logo--}}
+                            <div class="row-span-3 bg-red-300">
+                                @if (config('invoices.logo_file') != '')
+                                    <div class="col-md-12 text-center">
+                                        <img src="{{ config('invoices.logo_file') }}" style="width: 200px; height: auto" />
+                                    </div>
+                                @endif
+                                <div class="row">
+                                    <h2 class="text-3xl ml-8 mt-6 text-gray-500">{{$invoice->types->name}}</h2>
                                 </div>
-                            @endif
+                                <div class="row top-4">
+                                    <div class="float-left small ml-4 mt-5">
+                                        <strong>{{$invoice->types->name}} for:</strong><br>
+                                        <strong>{{ $invoice->associates->name }}</strong>
+                                        <br />
 
+                                        <b>Address</b>:
+                                        {{ $invoice->associates->address }}
+                                        @if ($invoice->associates->city->postcode != '')
+                                            ,
+                                            {{ $invoice->associates->city->postcode }}
+                                        @endif
+                                        , {{ $invoice->associates->city->name }}
+                                        @if ($invoice->associates->country->name != '')
+                                            ,
+                                            {{ $invoice->associates->country->name }}
+                                        @endif
 
-                            <div class="col-md-12 offset-2 text-left small pt-2">
-                                <strong>Invoice {{ $invoice->number }}</strong>
-                                <br />
-                                Date: {{ $invoice->date }}<br>
-                                Due date: {{ $invoice->due_date }}
+                                        @if ($invoice->associates->phone != '')
+                                            <br /><b>Phone</b>: {{ $invoice->associates->phone }}
+                                        @endif
+                                        @if ($invoice->associates->email != '')
+                                            <br /><b>Email</b>: {{ $invoice->associates->email }}
+                                        @endif
+
+                                    </div>
+                                </div>
+
                             </div>
-                        </div>
 
-                        <div class="row clearfix" style="margin-top:20px">
-                            <div class="col-md-12">
-                                <div class="float-left col-md-6 small">
-                                    <strong>{{ $invoice->associates->name }}</strong>
-                                    <br />
-
-                                    <b>Address</b>:
-                                    {{ $invoice->associates->address }}
-                                    @if ($invoice->associates->city->postcode != '')
-                                        ,
-                                        {{ $invoice->associates->city->postcode }}
-                                    @endif
-                                    , {{ $invoice->associates->city->name }}
-                                    @if ($invoice->associates->country->name != '')
-                                        ,
-                                        {{ $invoice->associates->country->name }}
-                                    @endif
-
-                                    @if ($invoice->associates->phone != '')
-                                        <br /><br /><b>Phone</b>: {{ $invoice->associates->phone }}
-                                    @endif
-                                    @if ($invoice->associates->email != '')
-                                        <br /><br /><b>Email</b>: {{ $invoice->associates->email }}
-                                    @endif
-
-{{--                                    @if ($invoice->customer->customer_fields)--}}
-{{--                                        @foreach ($invoice->customer->customer_fields as $field)--}}
-{{--                                            <br /><br /><b>{{ $field->field_key }}</b>: {{ $field->field_value }}--}}
-{{--                                        @endforeach--}}
-{{--                                    @endif--}}
-                                </div>
+                            <div class="col-span-2 bg-yellow-400">
                                 <div class="float-right col-md-5 small">
                                     {{ config('invoices.seller.name') }}
                                     <br>
@@ -73,6 +68,28 @@
                                         {{ config('invoices.seller.email') }}
                                     @endif
                                 </div>
+                            </div>
+
+                            <div class="row-span-2 col-span-2 bg-green-400">
+                                <div class="col-md-5 small top-1/2 float-right">
+                                    <strong>{{ $invoice->types->name }} &nbsp;# {{ $invoice->number }}</strong>
+                                    <br />
+                                    Date: {{ $invoice->date }}<br>
+                                    Due date: {{ $invoice->due_date }}<br>
+                                    Payment type: via Bank <br>
+                                    Delivery place: {{$invoice->associates->address }}
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="row clearfix" style="margin-top:20px">
+                            <div class="col-md-12">
+
+
                             </div>
                         </div>
 

@@ -15,7 +15,8 @@ class Invoice extends Model
 
     protected $with = [
         'associates',
-        'details'
+        'details',
+        'types'
     ];
 
     public function associates(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -26,5 +27,10 @@ class Invoice extends Model
     public function details(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(InvoiceDetail::class, 'parent_id');
+    }
+
+    public function types(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(InvoiceType::class, 'type');
     }
 }

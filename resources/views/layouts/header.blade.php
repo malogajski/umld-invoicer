@@ -18,7 +18,7 @@
     }
 </style>
 @auth
-<div class="py-3 px-5 bg-white rounded shadow-xl">
+<div class="py-3 px-5 bg-white rounded shadow-xl font-ibm">
     <div class="-mx-1">
         <ul class="flex w-full flex-wrap items-center h-10">
 

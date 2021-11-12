@@ -34,12 +34,12 @@
 
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400&family=Poppins:wght@100&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
 
     <!-- Alpine JS -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
@@ -49,7 +49,7 @@
 
     @livewireStyles
 </head>
-<body>
+<body class="font-ibm">
 @livewireScripts
 
 @include('layouts.header')
@@ -57,7 +57,7 @@
 
 
     <main id="app">
-        <div style="position: relative; margin-top: 50px;">
+        <div style="position: relative; margin-top: 20px;">
         @yield('content')
         </div>
     </main>

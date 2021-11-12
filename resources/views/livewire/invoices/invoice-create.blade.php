@@ -5,27 +5,33 @@
 
             <div class="card-header">
                 <div class="row">
-
                     {{-- Left Side Master --}}
                     <div class="col-md-5">
                         <div class="col-xs-2">
-                            <label for="number">Invoice No.</label>
-                            <input type="text" name="number" id="number" wire:model="number" class="form-control">
+                            <label for="number" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Invoice No.</label>
+                            <input type="text" name="number" id="number" wire:model="number"
+                                   class="appearance-none block w-50 bg-gray-200 text-gray-700 border border-red-500 rounded
+                                   py-2 px-2 mb-2
+                                   leading-tight focus:outline-none focus:bg-white">
 
-                            <label for="date">Creation Date</label>
-                            <input type="date" name="date" id="date" wire:model="date" class="form-control">
+                            <label for="date"class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Creation Date</label>
+                            <input type="date" name="date" id="date" wire:model="date"
+                                   class="appearance-none block w-50 bg-gray-200 text-gray-700 border border-red-500 rounded
+                                   py-2 px-2 mb-2
+                                   leading-tight focus:outline-none focus:bg-white">
 
-                            <label for="due_date">Due Date</label>
-                            <input type="date" name="due_date" id="due_date" wire:model="due_date" class="form-control">
+                            <label for="due_date"class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Due Date</label>
+                            <input type="date" name="due_date" id="due_date" wire:model="due_date"
+                                   class="appearance-none block w-50 bg-gray-200 text-gray-700 border border-red-500 rounded py-2 px-2 mb-2 leading-tight focus:outline-none focus:bg-white">
                         </div>
                     </div>
 
                     {{-- Right Side Master --}}
                     <div class="col-md-5">
 
-                        <label for="associate_id">Customer name</label>
+                        <label for="associate_id"class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Customer name</label>
                         <select name="associate_id"
-                                class="form-control"
+                                class="block appearance-none w-50 bg-gray-200 border border-gray-200 text-gray-700 py-2 px-2 mb-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 wire:model="associate_id">
                             <option value="">-- choose customer --</option>
                             @foreach ($associates as $associate)
@@ -36,9 +42,9 @@
                             @endforeach
                         </select>
 
-                        <label for="type">Invoice type</label>
+                        <label for="type"class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Invoice type</label>
                         <select name="type"
-                                class="form-control"
+                                class="block appearance-none w-50 bg-gray-200 border border-gray-200 text-gray-700 py-2 px-2 mb-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 wire:model="type">
                             <option value="">-- choose type --</option>
                             @foreach ($types as $item)
@@ -92,7 +98,7 @@
                     <tbody class="bg-gray-200">
                     @foreach($list as $index => $item)
                         <tr class="bg-white border-2 border-gray-200">
-                            <td class="px-4 py-2">{{ $item['id'] ?? '' }}</td>
+                            <td class="px-4 py-2">{{ $item['id'] ?? $index }}</td>
                             <td class="px-4 py-2">{{ $item['products']['id'] ?? $item['product_id'] ?? ''}}</td>
                             <td class="px-4 py-2">{{ $item['products']['name'] ?? $item['name'] ?? ''}}</td>
                             <td class="px-4 py-2 text-right">{{  $item['price'] ?? ''}}</td>
@@ -117,10 +123,12 @@
                             <td class="px-4 py-2 text-right">{{$item_total}}</td>
 
                             <td class="px-4 py-2">
-                                <span class=""
-                                    data-toggle="modal"
-                                      data-target="#exampleModal">
-                                    <i class="fa fa-trash hover:shadow-lg hover:colors-red-300"></i></span>
+                                <button type="button" wire:click="deleteId({{ $index}})" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Delete</button>
+{{--                                <span class=""--}}
+{{--                                    data-toggle="modal"--}}
+{{--                                      data-index-number="{{$item['id']}}"--}}
+{{--                                      data-target="#exampleModal">--}}
+{{--                                    <i class="fa fa-trash hover:shadow-lg hover:colors-red-300"></i></span>--}}
                             </td>
 
                         </tr>
@@ -157,10 +165,12 @@
                             </div>
                             <div class="modal-body">
                                 <p>Are you sure want to delete?</p>
+                                <p id="data.indexNumber">Index:{{$item['id'] ?? '-'}}</p>
+                                <input type="text" >
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
-                                <button type="button" wire:click.prevent="removeProduct({{ $index ?? null }})" class="btn btn-danger close-modal" data-dismiss="modal">Yes, Delete</button>
+                                <button type="button" wire:click.prevent="removeProduct()" class="btn btn-danger close-modal" data-dismiss="modal">Yes, Delete</button>
                             </div>
                         </div>
                     </div>

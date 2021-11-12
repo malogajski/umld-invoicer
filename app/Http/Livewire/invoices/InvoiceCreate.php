@@ -27,6 +27,7 @@ class InvoiceCreate extends Component
     public $number;
     public $sub_total;
     public $tax_total;
+    public $deleteId;
 
 
     protected $rules = [
@@ -36,6 +37,7 @@ class InvoiceCreate extends Component
 
     public function mount(Invoice $invoice)
     {
+        $this->deleteId = 0;
         $this->invoice = $invoice ?? new Invoice();
         $this->associate_id = $invoice->associate_id ?? null;
         $this->type = $invoice->type ?? null;
@@ -118,8 +120,15 @@ class InvoiceCreate extends Component
 //        $this->list[$index]['is_saved'] = true;
     }
 
-    public function removeProduct($index)
+    public function deleteId($id)
     {
+        $this->deleteId = $id;
+    }
+
+    public function removeProduct()
+    {
+        $index = $this->deleteId;
+
         if (isset($this->list[$index]['id']) && intval($this->list[$index]['id']) > 0) {
             InvoiceDetail::destroy([$this->list[$index]['id']]);
         }
