@@ -27,7 +27,6 @@ class InvoiceCreate extends Component
     public $number;
     public $sub_total;
     public $tax_total;
-//    public $totals = [];
 
 
     protected $rules = [
@@ -37,7 +36,6 @@ class InvoiceCreate extends Component
 
     public function mount(Invoice $invoice)
     {
-//        dd($invoice);
         $this->invoice = $invoice ?? new Invoice();
         $this->associate_id = $invoice->associate_id ?? null;
         $this->type = $invoice->type ?? null;
@@ -52,11 +50,6 @@ class InvoiceCreate extends Component
         $this->total = 0.00;
         $this->date = date_format(Carbon::now(), 'Y-m-d');
         $this->due_date = date_format(Carbon::now()->addDays(15), 'Y-m-d');
-//        $this->totals = [
-//            'sub_total' => 0,
-//            'tax_total' => 0,
-//            'grand_total' => 0
-//        ];
     }
 
     public function render()
@@ -144,7 +137,8 @@ class InvoiceCreate extends Component
                 'quantity'          => $list_item['quantity'],
                 'price'             => $list_item['price'],
                 'total_without_tax' => $list_item['quantity'] * $list_item['price'],
-                'tax'               => 0,
+                'tax'               => $list_item['tax'],
+                'total_tax'         => $list_item['tax'] > 0 ? ($list_item['tax'] / 100) * ($list_item['quantity'] * $list_item['price']) : 0,
                 'total'             => $list_item['quantity'] * $list_item['price'],
             ]);
     }
@@ -181,7 +175,8 @@ class InvoiceCreate extends Component
                             'quantity'          => $product['quantity'],
                             'price'             => $product['price'],
                             'total_without_tax' => $product['quantity'] * $product['price'],
-                            'tax'               => 0,
+                            'tax'               => $product['tax'],
+                            'total_tax'         => $product['tax'] > 0 ? ($product['tax'] / 100) * ($product['quantity'] * $product['price']) : 0,
                             'total'             => $product['quantity'] * $product['price'],
                         ]);
             }
@@ -209,7 +204,8 @@ class InvoiceCreate extends Component
                         'quantity'          => $product['quantity'],
                         'price'             => $product['price'],
                         'total_without_tax' => $product['quantity'] * $product['price'],
-                        'tax'               => 0,
+                        'tax'               => $product['tax'],
+                        'total_tax'         => $product['tax_total'],
                         'total'             => $product['quantity'] * $product['price'],
                     ]);
             }

@@ -96,11 +96,6 @@
                             <td class="px-4 py-2">{{ $item['products']['id'] ?? $item['product_id'] ?? ''}}</td>
                             <td class="px-4 py-2">{{ $item['products']['name'] ?? $item['name'] ?? ''}}</td>
                             <td class="px-4 py-2 text-right">{{  $item['price'] ?? ''}}</td>
-
-                            {{--                            <td>{{ $invoice->details ? $item['products']['id'] : $item['product_id']}}</td>--}}
-                            {{--                            <td>{{ $invoice->details ? $item['products']['name'] : $item['name'] ?? ''}}</td>--}}
-                            {{--                            <td>{{ $invoice->details ? $item['products']['price'] : $item['price']}}</td>--}}
-
                             <td class="px-4 py-2">
                                 <input type="number" placeholder="0.00" name="list[{{$index}}][quantity]"
                                        class="mb-1 bg-gray-100 p-2 rounded-lg shadow-md focus:outline-none focus:border-indigo-600" wire:model="list.{{$index}}.quantity"/>
@@ -116,12 +111,9 @@
                                 $list[$index]['tax_total'] = $item_tax_total;
                             @endphp
 
-                            <input class="px-4 py-2 text-right" type="hidden" name="list[{{$index}}][sub_total]"
-                                   wire:model="list.{{$index}}.sub_total"/>
-
+{{--                            <input class="px-4 py-2 text-right" type="hidden" name="list[{{$index}}][sub_total]" wire:model="list.{{$index}}.sub_total"/>--}}
                             <td class="px-4 py-2 text-right" wire:model="sub_total">{{$list[$index]['sub_total']}}</td>
                             <td class="px-4 py-2 text-right" wire:model="tax_total">{{$list[$index]['tax_total']}}</td>
-
                             <td class="px-4 py-2 text-right">{{$item_total}}</td>
 
                             <td class="px-4 py-2">
