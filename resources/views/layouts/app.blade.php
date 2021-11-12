@@ -51,8 +51,12 @@
 </head>
 <body>
 @livewireScripts
-@include('layouts.sidebar')
-    <main class="py-4" id="app">
+
+@include('layouts.header')
+{{--@include('layouts.sidebar')--}}
+
+
+    <main id="app">
         <div style="position: relative; margin-top: 50px;">
         @yield('content')
         </div>

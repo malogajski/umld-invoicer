@@ -53,7 +53,7 @@ Route::middleware(['auth'])->group(function () {
     //Invoice Items
     Route::resource('invoices-details', InvoicesDetailController::class);
     Route::delete('invoice/item/{id}/delete', [InvoicesDetailController::class, 'destroy'])->name('invoice.delete.item');
-    Route::post('invoice/item/action', [InvoicesDetailController::class,'action'])->name('invoice.item.action');
+    Route::post('invoice/item/action', [InvoicesDetailController::class, 'action'])->name('invoice.item.action');
 
     Route::get('invoices/{invoice_id}/download', [InvoicesController::class, 'download'])->name('invoices.download');
 

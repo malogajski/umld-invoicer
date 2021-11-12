@@ -30,7 +30,7 @@
                             <option value="">-- choose customer --</option>
                             @foreach ($associates as $associate)
 
-                                <option value="{{ $associate->id }}"  selected >
+                                <option value="{{ $associate->id }}" selected>
                                     {{ $associate->name }}
                                 </option>
                             @endforeach
@@ -53,57 +53,60 @@
                 </div>
             </div>
             <div class="card-body">
-                {{--        SEARCH BOX - TODO: Include this from component --}}
-                <div class="col-md-8 align-content-center">
-                    <label for="search">Search</label>
-                    <input type="text" wire:model="searchProduct" name="search" id="search" class="form-control" autocomplete="off">
-                    <ul class="list-group">
-                        @foreach($products as $product)
-                            <li wire:click="selectedProduct({{$product->id}})" wire:model="results" class="list-group-item list-group-item-action shadow">
-                                {{ $product->name }} ( {{ $product->price }})
-                            </li>
+                <div class="row">
+                    {{--        SEARCH BOX - TODO: Include this from component --}}
+                    <div class="col-md-8 align-content-center">
+                        <label for="search">Search</label>
+                        <input type="text" wire:model="searchProduct" name="search" id="search" class="form-control" autocomplete="off">
+                        <ul class="list-group">
+                            @foreach($products as $product)
+                                <li wire:click="selectedProduct({{$product->id}})" wire:model="results" class="list-group-item list-group-item-action shadow">
+                                    {{ $product->name }} ( {{ $product->price }})
+                                </li>
 
-                        @endforeach
-                    </ul>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
                 {{-- END SEARCH --}}
 
                 {{--        ITEMS           --}}
                 <br>
-                <table class="table table-striped table-responsive-md">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>PID</th>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Tax</th>
-                        <th>Sub total</th>
-                        <th>Tax total</th>
-                        <th class="text-right">TOTAL</th>
+
+                <table class="min-w-full leading-normal rounded shadow">
+                    <thead class="justify-between">
+                    <tr class="bg-gray-800">
+                        <th class="px-4 py-2"><span class="text-gray-300">#</span></th>
+                        <th class="px-4 py-2"><span class="text-gray-300">PID</span></th>
+                        <th class="px-4 py-2"><span class="text-gray-300">Product</span></th>
+                        <th class="px-4 py-2"><span class="text-gray-300">Price</span></th>
+                        <th class="px-4 py-2"><span class="text-gray-300">Quantity</span></th>
+                        <th class="px-4 py-2"><span class="text-gray-300">Tax (%)</span></th>
+                        <th class="px-4 py-2"><span class="text-gray-300">Name</span>Sub total</th>
+                        <th class="px-4 py-2"><span class="text-gray-300">Tax total</span></th>
+                        <th class="px-4 py-2"><span class="text-gray-300">TOTAL</span></th>
                         <th></th>
                     </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody class="bg-gray-200">
                     @foreach($list as $index => $item)
-                        <tr>
-                            <td>{{ $item['id'] ?? '' }}</td>
-                            <td>{{ $item['products']['id'] ?? $item['product_id'] ?? ''}}</td>
-                            <td>{{ $item['products']['name'] ?? $item['name'] ?? ''}}</td>
-                            <td>{{  $item['price'] ?? ''}}</td>
+                        <tr class="bg-white border-2 border-gray-200">
+                            <td class="px-4 py-2">{{ $item['id'] ?? '' }}</td>
+                            <td class="px-4 py-2">{{ $item['products']['id'] ?? $item['product_id'] ?? ''}}</td>
+                            <td class="px-4 py-2">{{ $item['products']['name'] ?? $item['name'] ?? ''}}</td>
+                            <td class="px-4 py-2 text-right">{{  $item['price'] ?? ''}}</td>
 
-{{--                            <td>{{ $invoice->details ? $item['products']['id'] : $item['product_id']}}</td>--}}
-{{--                            <td>{{ $invoice->details ? $item['products']['name'] : $item['name'] ?? ''}}</td>--}}
-{{--                            <td>{{ $invoice->details ? $item['products']['price'] : $item['price']}}</td>--}}
+                            {{--                            <td>{{ $invoice->details ? $item['products']['id'] : $item['product_id']}}</td>--}}
+                            {{--                            <td>{{ $invoice->details ? $item['products']['name'] : $item['name'] ?? ''}}</td>--}}
+                            {{--                            <td>{{ $invoice->details ? $item['products']['price'] : $item['price']}}</td>--}}
 
-                            <td>
-                                <input type="number" placeholder="0.00"   name="list[{{$index}}][quantity]"
-                                       class="form-control col-4" wire:model="list.{{$index}}.quantity"/>
+                            <td class="px-4 py-2">
+                                <input type="number" placeholder="0.00" name="list[{{$index}}][quantity]"
+                                       class="mb-1 bg-gray-100 p-2 rounded-lg shadow-md focus:outline-none focus:border-indigo-600" wire:model="list.{{$index}}.quantity"/>
                             </td>
 
-                            <td>{{$item['tax']}}</td>
+                            <td class="px-4 py-2 text-right">{{$item['tax']}}</td>
 
                             @php
                                 $item_sub_total = $item['price'] * ($item['quantity'] ?? 1);
@@ -113,50 +116,76 @@
                                 $list[$index]['tax_total'] = $item_tax_total;
                             @endphp
 
-                            <input type="hidden" name="list[{{$index}}][sub_total]"
+                            <input class="px-4 py-2 text-right" type="hidden" name="list[{{$index}}][sub_total]"
                                    wire:model="list.{{$index}}.sub_total"/>
 
-                            <td class="text-right" wire:model="sub_total">{{$list[$index]['sub_total']}}</td>
-                            <td class="text-right" wire:model="tax_total">{{$list[$index]['tax_total']}}</td>
+                            <td class="px-4 py-2 text-right" wire:model="sub_total">{{$list[$index]['sub_total']}}</td>
+                            <td class="px-4 py-2 text-right" wire:model="tax_total">{{$list[$index]['tax_total']}}</td>
 
-                            <td class="text-right">{{$item_total}}</td>
+                            <td class="px-4 py-2 text-right">{{$item_total}}</td>
 
-                            <td>
-                                <button class="btn btn-sm btn-danger"
-                                        wire:click.prevent="removeProduct({{$index}})">Delete
-                                </button>
+                            <td class="px-4 py-2">
+                                <span class=""
+                                    data-toggle="modal"
+                                      data-target="#exampleModal">
+                                    <i class="fa fa-trash hover:shadow-lg hover:colors-red-300"></i></span>
                             </td>
 
                         </tr>
                     @endforeach
                     </tbody>
                     <tfoot>
-                    <tr>
-                        <td colspan="7" class="text-right">SUB TOTAL:</td>
-                        <td class="text-right">{{$sub_total}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="7" class="text-right">TAX TOTAL:</td>
-                        <td class="text-right">{{$tax_total}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="7" class="text-right">TOTAL:</td>
-                        <td class="text-right">{{$total}}</td>
-                    </tr>
+                    <div class="flex flex-col justify-right items-right">
+                        <tr>
+                            <td colspan="7" class="text-right py-2">SUB TOTAL:</td>
+                            <td class="text-right">{{$sub_total}}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" class="text-right py-2">TAX TOTAL:</td>
+                            <td class="text-right">{{$tax_total}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" class="text-right py-2">TOTAL:</td>
+                            <td class="text-right">{{$total}}</td>
+                        </tr>
+                    </div>
                     </tfoot>
                 </table>
-                <div>
 
+                <!-- Modal -->
+                <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Delete Confirm</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true close-btn">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure want to delete?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
+                                <button type="button" wire:click.prevent="removeProduct({{ $index ?? null }})" class="btn btn-danger close-modal" data-dismiss="modal">Yes, Delete</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
             <div class="card-footer">
-                <input class="btn btn-primary" type="submit" value="Save Invoice">
+                <button type="submit" value="Save Invoice"
+                        class="inline-block px-6 py-2 font-medium leading-7 text-center text-blue-700 uppercase transition bg-transparent border-2 border-blue-700 rounded shadow ripple hover:shadow-lg hover:bg-blue-100 focus:outline-none waves-effect"
+                >
+                    SAVE
+                </button>
+                {{--                <input class="btn btn-primary" type="submit" value="Save Invoice">--}}
             </div>
         </form>
 
     </div>
-
-
 
 
     {{--<div>--}}

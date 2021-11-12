@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="container">
-        <livewire:invoice-create/>
+        <livewire:invoices.invoice-create/>
     </div>
 @endsection

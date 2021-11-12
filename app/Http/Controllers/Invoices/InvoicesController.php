@@ -33,7 +33,7 @@ class InvoicesController extends Controller
      */
     public function create(Request $request)
     {
-        return view('invoices.create');
+        return view('livewire.invoices.invoice-create');
     }
 
     /**
@@ -83,7 +83,7 @@ class InvoicesController extends Controller
                 }
             }
         }
-        return redirect()->route('home');
+        return redirect()->route('invoices.index');
     }
 
     /**

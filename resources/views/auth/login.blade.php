@@ -1,72 +1,65 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+<!-- component -->
+<!-- Root element for center items -->
+<div class="flex flex-col h-screen bg-gray-100">
+    <!-- Auth Card Container -->
+    <div class="grid place-items-center mx-2 my-20 sm:my-auto">
+        <!-- Auth Card -->
+        <div class="w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-4/12
+            px-6 py-10 sm:px-10 sm:py-6
+            bg-white rounded-lg shadow-md lg:shadow-lg">
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+            <!-- Card Title -->
+            <h2 class="text-center font-semibold text-3xl lg:text-4xl text-gray-800">
+                Login
+            </h2>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+            <form class="mt-10" method="POST" action="{{ route('login') }}">
+                @csrf
+                <!-- Email Input -->
+                <label for="email" class="block text-xs font-semibold text-gray-600 uppercase">E-mail</label>
+                <input id="email" type="email" name="email" placeholder="e-mail address" autocomplete="email"
+                       class="block w-full py-3 px-1 mt-2
+                    text-gray-800 appearance-none
+                    border-b-2 border-gray-100
+                    focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                       required />
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                <!-- Password Input -->
+                <label for="password" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Password</label>
+                <input id="password" type="password" name="password" placeholder="password" autocomplete="current-password"
+                       class="block w-full py-3 px-1 mt-2 mb-4
+                    text-gray-800 appearance-none
+                    border-b-2 border-gray-100
+                    focus:text-gray-500 focus:outline-none focus:border-gray-200"
+                       required />
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                <!-- Auth Buttton -->
+                <button type="submit"
+                        class="w-full py-3 mt-10 bg-gray-800 rounded-sm
+                    font-medium text-white uppercase
+                    focus:outline-none hover:bg-gray-700 hover:shadow-none">
+                    Login
+                </button>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                <!-- Another Auth Routes -->
+                <div class="sm:flex sm:flex-wrap mt-8 sm:mb-4 text-sm text-center">
+                    <a href="{{ route('password.request') }}" class="flex-2 underline">
+                        Forgot password?
+                    </a>
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                    <p class="flex-1 text-gray-500 text-md mx-4 my-1 sm:my-auto">
+                        or
+                    </p>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+                    <a href="{{ route('register') }}" class="flex-2 underline">
+                        Create an Account
+                    </a>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

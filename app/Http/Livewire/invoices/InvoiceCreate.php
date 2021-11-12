@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Invoices;
 
 use App\Models\Codebooks\Associate;
 use App\Models\Codebooks\Product;
@@ -91,7 +91,7 @@ class InvoiceCreate extends Component
         }
 
 //        return view('livewire.components.search-product', ['products' => $this->products]);
-        return view('livewire.invoice-create', ['products' => $this->products]);
+        return view('livewire.invoices.invoice-create', ['products' => $this->products]);
     }
 
     public function selectedProduct($id)
@@ -151,7 +151,7 @@ class InvoiceCreate extends Component
 
     public function saveInvoice()
     {
-        if ($this->invoice) {
+        if ($this->invoice->id) {
 
             Invoice::where('id', $this->invoice->id)->update([
                 'host_id'      => 1,
@@ -205,7 +205,7 @@ class InvoiceCreate extends Component
                     [
                         'host_id'           => 1,
                         'parent_id'         => $invoice->id,
-                        'product_id'        => $product['id'],
+                        'product_id'        => $product['product_id'],
                         'quantity'          => $product['quantity'],
                         'price'             => $product['price'],
                         'total_without_tax' => $product['quantity'] * $product['price'],
@@ -254,7 +254,7 @@ class InvoiceCreate extends Component
             }
         }
 
-        return view('livewire.invoice-create', [
+        return view('', [
             'subtotal' => $total,
             'total' => $total * (1 + (is_numeric($this->taxes) ? $this->taxes : 0) / 100)
         ]);
