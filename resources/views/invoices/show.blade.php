@@ -10,9 +10,10 @@
                 <div class="card-body">
                     <div class="container">
 
-                        <div class="grid grid-rows-3 grid-flow-col gap-3">
-{{--                            Logo--}}
-                            <div class="row-span-3 bg-red-300">
+                        {{-- Invoice header --}}
+                        <div class="grid grid-rows-3 grid-flow-col gap-1">
+                        {{-- Logo--}}
+                            <div class="row-span-3">
                                 @if (config('invoices.logo_file') != '')
                                     <div class="col-md-12 text-center">
                                         <img src="{{ config('invoices.logo_file') }}" style="width: 200px; height: auto" />
@@ -50,9 +51,9 @@
                                 </div>
 
                             </div>
-
-                            <div class="col-span-2 bg-yellow-400">
-                                <div class="float-right col-md-5 small">
+                        {{-- Right side top header --}}
+                            <div class="col-span-2">
+                                <div class="float-right col-md-6 small">
                                     {{ config('invoices.seller.name') }}
                                     <br>
                                     {{ config('invoices.seller.address') }}
@@ -69,9 +70,9 @@
                                     @endif
                                 </div>
                             </div>
-
-                            <div class="row-span-2 col-span-2 bg-green-400">
-                                <div class="col-md-5 small top-1/2 float-right">
+                        {{-- Right side bottom header --}}
+                            <div class="row-span-2 col-span-2">
+                                <div class="col-md-6 small top-1/2 float-right">
                                     <strong>{{ $invoice->types->name }} &nbsp;# {{ $invoice->number }}</strong>
                                     <br />
                                     Date: {{ $invoice->date }}<br>
@@ -81,21 +82,11 @@
                                 </div>
                             </div>
 
-
-                        </div>
-
-
-
-                        <div class="row clearfix" style="margin-top:20px">
-                            <div class="col-md-12">
-
-
-                            </div>
                         </div>
 
                         <div class="row clearfix" style="margin-top:20px">
                             <div class="col-md-12">
-                                <table class="table table-bordered table-hover" id="tab_logic">
+                                <table class="table table-bordered table-hover text-sm" id="tab_logic">
                                     <thead>
                                     <tr>
                                         <th class="text-center"> # </th>
@@ -129,7 +120,7 @@
                         <div class="row clearfix" style="margin-top:20px">
                             <div class="col-md-12">
                                 <div class="float-right col-md-5">
-                                    <table class="table table-bordered table-hover" id="tab_logic_total">
+                                    <table class="table table-bordered table-hover text-sm" id="tab_logic_total">
                                         <tbody>
                                         <tr>
                                             <th class="text-left" width="60%">Sub Total ({{ config('invoices.currency') }})</th>

@@ -37,6 +37,9 @@ class InvoiceCreate extends Component
 
     public function mount(Invoice $invoice)
     {
+        $this->associates = Associate::all();
+        $this->types = InvoiceType::all();
+
         $this->deleteId = 0;
         $this->invoice = $invoice ?? new Invoice();
         $this->associate_id = $invoice->associate_id ?? null;
@@ -46,8 +49,7 @@ class InvoiceCreate extends Component
             $this->list = $invoice->details()->get()->toArray();
         }
 //        dd($this->list);
-        $this->associates = Associate::all();
-        $this->types = InvoiceType::all();
+
         $this->searchProduct = '';
         $this->total = 0.00;
         $this->date = date_format(Carbon::now(), 'Y-m-d');

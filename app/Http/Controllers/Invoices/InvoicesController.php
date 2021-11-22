@@ -33,7 +33,8 @@ class InvoicesController extends Controller
      */
     public function create(Request $request)
     {
-        return view('livewire.invoices.invoice-create');
+        return view('invoices.create');
+//        return view('livewire.invoices.invoice-create');
     }
 
     /**

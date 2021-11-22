@@ -1,5 +1,5 @@
 module.exports = {
-    // mode: 'jit',
+    mode: 'jit',
   purge: [
       './resources/**/*.blade.php',
       './resources/**/*.js',
@@ -17,5 +17,7 @@ module.exports = {
         tableLayout: ['hover', 'focus'],
     },
   },
-  plugins: [],
+  plugins: [
+      require('@tailwindcss/forms')
+  ],
 }

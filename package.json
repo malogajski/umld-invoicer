@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
+        "@tailwindcss/forms": "^0.3.4",
         "font-awesome": "^4.7.0"
     }
 }

@@ -3,3 +3,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .input-div-main {
+        @apply flex-col ml-3 mt-1;
+    }
+
+    .input-label-main {
+        @apply block text-sm font-medium text-gray-700 uppercase;
+    }
+
+    .input-detail-2-col-div {
+        @apply space-x-2 ml-0 mr-0;
+    }
+
+    .input-div-detail {
+        @apply flex-col ml-3 mt-1;
+    }
+
+    .input-label-detail {
+        @apply block text-sm font-medium text-gray-700 uppercase;
+    }
+
+}

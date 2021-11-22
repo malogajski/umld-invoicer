@@ -14,68 +14,73 @@
                             @csrf
 
                             <div class="card-deck">
-                                <div class="col-md-4">
-                                    <label for="name">Type</label>
-                                    <select name="type" id="type"  class="form-control">
-                                        @foreach($types as $type)
-                                            <option value="{{$type}}">{{ $type }}</option>
-                                        @endforeach
-                                    </select>
+                                <div>
+                                    <label for="name" class="block text-sm ml-8">Type</label>
+                                    <div class="mt-1 ml-8">
+                                        <select name="type" id="type">
+                                            @foreach($types as $type)
+                                                <option value="{{$type}}" @if(old('type') === $type) selected @endif>{{ $type }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <label for="status">Status</label>
-                                    <select name="status" id="status" class="form-control">
+                                <div>
+                                    <label for="status" class="block text-sm ml-8">Status</label>
+                                    <div class="mt-1 ml-8">
+                                    <select name="status" id="status">
                                         @foreach($statuses as $status)
-                                            <option value="{{$status}}">{{ $status }}</option>
+                                            <option value="{{$status}}" @if(old('status') === $status) selected @endif>{{ $status }}</option>
                                         @endforeach
                                     </select>
+                                    </div>
                                 </div>
+
                             </div>
 
                             <div class="col-md-4">
                                 <label for="name">Title</label>
-                                <input type="text" name='name' id="name" class="form-control" required/>
+                                <input type="text" name="name" id="name" class="form-control" value="{{old('name' ?? $name)}}" required/>
                             </div>
 
                             <div class="col-md-4">
                                 <label for="description">Second name or description</label>
-                                <input type="text" name="description" id="description" class="form-control" required/>
+                                <input type="text" name="description" id="description" value="{{old('description' ?? $description)}}" class="form-control" required/>
                             </div>
 
                             <div class="col-md-4">
                                 <label for="address">Address</label>
-                                <input type="text" name="address" id="address" class="form-control" required/>
+                                <input type="text" name="address" id="address" class="form-control" value="{{old('address' ?? $address)}}" required/>
                             </div>
 
                             <div class="col-md-4">
                                 <label for="pib">PIB</label>
-                                <input type="text" name="pib" id="pib" class="form-control" required/>
+                                <input type="text" name="pib" id="pib" class="form-control" value="{{old('pib' ?? $pib)}}" required/>
                             </div>
 
                             <div class="col-md-4">
                                 <label for="registration_number">Register No.</label>
-                                <input type="text" name="registration_number" id="registration_number" class="form-control" required/>
+                                <input type="text" name="registration_number" id="registration_number" value="{{old('registration_number' ?? $registration_number)}}" class="form-control" required/>
                             </div>
 
                             <div class="col-md-4">
                                 <label for="responsible_person">Responsible person</label>
-                                <input type="text" name="responsible_person" id="responsible_person" class="form-control" required>
+                                <input type="text" name="responsible_person" id="responsible_person" value="{{old('responsible_person' ?? $responsible_person)}}" class="form-control" required>
                             </div>
 
                             <div class="col-md-4">
                                 <label for="phone">Phone</label>
-                                <input type="text" id="phone" name='phone' class="form-control"/>
+                                <input type="text" id="phone" name='phone' value="{{old('phone' ?? $phone)}}" class="form-control"/>
                             </div>
 
                             <div class="col-md-4">
                                 <label for="mobile">Mobile</label>
-                                <input type="text" id="mobile" name="mobile" class="form-control" required/>
+                                <input type="text" id="mobile" name="mobile" value="{{old('mobile' ?? $mobile)}}" class="form-control" required/>
                             </div>
 
                             <div class="col-md-4">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" name='email' class="form-control"/>
+                                <input type="email" id="email" name='email' value="{{old('email' ?? $email)}}" class="form-control"/>
                             </div>
 
                             <div class="card-deck m-sm-1">
@@ -84,7 +89,7 @@
                                     <select class="form-control" required name="country_id" id="country_id">
                                         <option value="">Choose Country</option>
                                         @foreach ($countries as $country)
-                                            <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                            <option value="{{ $country->id }}" @if((isset($country_id) && $country_id === $country->id) || old('country_id') === $country->id) selected @endif>{{ $country->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

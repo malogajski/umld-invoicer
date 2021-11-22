@@ -33,13 +33,14 @@
                         <select name="associate_id"
                                 class="block appearance-none w-50 bg-gray-200 border border-gray-200 text-gray-700 py-2 px-2 mb-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 wire:model="associate_id">
-                            <option value="">-- choose customer --</option>
+                            <option value="" placeholder="Customers..."></option>
+                            @isset($associates)
                             @foreach ($associates as $associate)
-
                                 <option value="{{ $associate->id }}" selected>
                                     {{ $associate->name }}
                                 </option>
                             @endforeach
+                            @endisset
                         </select>
 
                         <label for="type"class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Invoice type</label>
@@ -47,11 +48,13 @@
                                 class="block appearance-none w-50 bg-gray-200 border border-gray-200 text-gray-700 py-2 px-2 mb-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 wire:model="type">
                             <option value="">-- choose type --</option>
+                            @isset($types)
                             @foreach ($types as $item)
                                 <option value="{{ $item->id }}">
                                     {{ $item->name }}
                                 </option>
                             @endforeach
+                            @endisset
                         </select>
 
                     </div>
@@ -61,17 +64,27 @@
             <div class="card-body">
                 <div class="row">
                     {{--        SEARCH BOX - TODO: Include this from component --}}
-                    <div class="col-md-8 align-content-center">
-                        <label for="search">Search</label>
-                        <input type="text" wire:model="searchProduct" name="search" id="search" class="form-control" autocomplete="off">
+                    <div class="col-md-8 align-content-center z-50">
+
+                        <input type="search" class="bg-purple-white shadow rounded border-0 p-3"
+                               wire:model="searchProduct" name="search" id="search"
+                               autocomplete="off"
+                               placeholder="Search by product name...">
+                        <div class="absolute pin-r pin-t mt-3 mr-4 text-purple-lighter">
+
+                        </div>
                         <ul class="list-group">
+                            @isset($products)
                             @foreach($products as $product)
-                                <li wire:click="selectedProduct({{$product->id}})" wire:model="results" class="list-group-item list-group-item-action shadow">
+                                <li wire:click="selectedProduct({{$product->id}})"
+                                    wire:model="results"
+                                    class="list-group-item list-group-item-action shadow">
                                     {{ $product->name }} ( {{ $product->price }})
                                 </li>
-
                             @endforeach
+                            @endisset
                         </ul>
+
                     </div>
                 </div>
                 {{-- END SEARCH --}}
@@ -86,9 +99,9 @@
                         <th class="px-4 py-2"><span class="text-gray-300">PID</span></th>
                         <th class="px-4 py-2"><span class="text-gray-300">Product</span></th>
                         <th class="px-4 py-2"><span class="text-gray-300">Price</span></th>
-                        <th class="px-4 py-2"><span class="text-gray-300">Quantity</span></th>
+                        <th class="px-4 px-2"><span class="text-gray-300">Quantity</span></th>
                         <th class="px-4 py-2"><span class="text-gray-300">Tax (%)</span></th>
-                        <th class="px-4 py-2"><span class="text-gray-300">Name</span>Sub total</th>
+                        <th class="px-4 py-2"><span class="text-gray-300">Sub total</span></th>
                         <th class="px-4 py-2"><span class="text-gray-300">Tax total</span></th>
                         <th class="px-4 py-2"><span class="text-gray-300">TOTAL</span></th>
                         <th></th>
@@ -96,6 +109,7 @@
                     </thead>
 
                     <tbody class="bg-gray-200">
+                    @isset($list)
                     @foreach($list as $index => $item)
                         <tr class="bg-white border-2 border-gray-200">
                             <td class="px-4 py-2">{{ $item['id'] ?? $index }}</td>
@@ -104,7 +118,8 @@
                             <td class="px-4 py-2 text-right">{{  $item['price'] ?? ''}}</td>
                             <td class="px-4 py-2">
                                 <input type="number" placeholder="0.00" name="list[{{$index}}][quantity]"
-                                       class="mb-1 bg-gray-100 p-2 rounded-lg shadow-md focus:outline-none focus:border-indigo-600" wire:model="list.{{$index}}.quantity"/>
+                                       style="width: 80px"
+                                       class="mb-1 bg-gray-100 p-1 rounded-lg shadow-md focus:outline-none focus:border-indigo-600" wire:model="list.{{$index}}.quantity"/>
                             </td>
 
                             <td class="px-4 py-2 text-right">{{$item['tax']}}</td>
@@ -123,7 +138,15 @@
                             <td class="px-4 py-2 text-right">{{$item_total}}</td>
 
                             <td class="px-4 py-2">
-                                <button type="button" wire:click="deleteId({{ $index}})" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                                <a href="#" wire:click="deleteId({{ $index}})"
+                                   data-toggle="modal" data-target="#exampleModal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 hover:text-pink-400" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
+                                        <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+
+
 {{--                                <span class=""--}}
 {{--                                    data-toggle="modal"--}}
 {{--                                      data-index-number="{{$item['id']}}"--}}
@@ -133,21 +156,22 @@
 
                         </tr>
                     @endforeach
+                    @endisset
                     </tbody>
                     <tfoot>
                     <div class="flex flex-col justify-right items-right">
                         <tr>
                             <td colspan="7" class="text-right py-2">SUB TOTAL:</td>
-                            <td class="text-right">{{$sub_total}}</td>
+                            <td class="text-right">{{$sub_total ?? 0}}</td>
                             <td></td>
                         </tr>
                         <tr>
                             <td colspan="7" class="text-right py-2">TAX TOTAL:</td>
-                            <td class="text-right">{{$tax_total}}</td>
+                            <td class="text-right">{{$tax_total ?? 0}}</td>
                         </tr>
                         <tr>
                             <td colspan="7" class="text-right py-2">TOTAL:</td>
-                            <td class="text-right">{{$total}}</td>
+                            <td class="text-right">{{$total ?? 0}}</td>
                         </tr>
                     </div>
                     </tfoot>
