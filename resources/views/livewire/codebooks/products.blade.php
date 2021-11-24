@@ -1,5 +1,5 @@
 <div>
-{{--    @dd($categories)--}}
+    {{--    @dd($categories)--}}
     <div class="m-2">
         <button wire:click.prevent="create"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
@@ -97,12 +97,10 @@
                 <td class="px-4 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">{{ Str::limit($product->description, 50) }}</td>
                 <td class="px-4 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">{{ $product->category->name ?? '' }}</td>
                 <td class="px-4 py-4 whitespace-no-wrap border-b border-gray-500 text-sm leading-5">
-
                     <a href="#" wire:click.prevent="edit({{ $product->id }})"><i class="far fa-edit"></i></a>
                     <a href="#" wire:click.prevent="delete({{ $product->id }})"
                        onclick="confirm('Are you sure?') || event.stopImmediatePropagation()">
                         <i class="far fa-trash-alt"></i></a>
-
                 </td>
             </tr>
         @endforeach
@@ -111,7 +109,7 @@
 
     {{ $products->links() }}
 
-    {{--    modal--}}
+    {{--modal--}}
     <div
         class="@if (!$showModal) hidden @endif flex items-center justify-center fixed left-0 bottom-0 w-full h-full bg-gray-800 bg-opacity-90">
         <div class="bg-white rounded-lg w-1/2">

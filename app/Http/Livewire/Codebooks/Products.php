@@ -42,7 +42,6 @@ class Products extends Component
     public function mount()
     {
         $this->categories = ProductCategory::select('id', 'name')->get();
-//        $this->categories = ProductCategory::pluck('name', 'id');
     }
 
     public function sortByColumn($column)

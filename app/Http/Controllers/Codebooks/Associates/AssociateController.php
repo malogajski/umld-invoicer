@@ -16,12 +16,12 @@ class AssociateController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
-        $associates = Associate::with(['city', 'state', 'country'])->paginate(5);
-        return view('associates.index', compact('associates'));
+//        $associates = Associate::with(['city', 'state', 'country'])->paginate(5);
+        return view('associates.index');
     }
 
     /**
