@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\HostController;
 use App\Http\Controllers\Admin\MiscellaneousController;
 use App\Http\Controllers\Codebooks\Associates\AssociateController;
 use App\Http\Controllers\Codebooks\CityController;
-use App\Http\Controllers\CodeBooks\Products\ProductController;
+use App\Http\Controllers\Codebooks\Products\ProductController;
 use App\Http\Controllers\Codebooks\StateController;
 use App\Http\Controllers\Invoices\InvoicesController;
 use App\Http\Controllers\Invoices\InvoicesDetailController;
