@@ -51,13 +51,11 @@
                         Forgot password?
                     </a>
 
-                    <p class="flex-1 text-gray-500 text-md mx-4 my-1 sm:my-auto">
-                        or
-                    </p>
-
+                    @if(Route::has('register'))
                     <a href="{{ route('register') }}" class="flex-2 underline">
                         Create an Account
                     </a>
+                    @endif
                 </div>
             </form>
         </div>

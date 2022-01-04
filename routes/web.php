@@ -21,14 +21,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes(['register' => false]);
 
 Route::get('/', function () {
     return view('home');
 });
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
     // Admin
@@ -64,4 +61,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('states', [StateController::class, 'index'])->name('states.index');
     Route::get('manage/csc', [CityController::class, 'editCityStateByCountry'])->name('manage.csc');
 
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
+
+//Auth::routes();
+
