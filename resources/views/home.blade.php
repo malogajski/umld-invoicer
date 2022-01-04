@@ -3,7 +3,11 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            Hello, {{auth()->user()->name}}
+            @if(isset(auth()->user()->name))
+                Hello, {{auth()->user()->name}}
+            @else
+                <script>window.location = "/login";</script>
+            @endif
         </div>
     </div>
 @endsection
