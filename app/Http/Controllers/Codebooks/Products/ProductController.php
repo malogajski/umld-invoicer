@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\CodeBooks\Products;
+namespace App\Http\Controllers\Codebooks\Products;
 
 use App\Http\Controllers\Controller;
 use App\Models\Codebooks\Product;
