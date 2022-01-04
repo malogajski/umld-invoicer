@@ -62,5 +62,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('associates', AssociateController::class);
     Route::get('cities', [CityController::class, 'index'])->name('cities.index');
     Route::get('states', [StateController::class, 'index'])->name('states.index');
+    Route::get('manage/csc', [CityController::class, 'editCityStateByCountry'])->name('manage.csc');
 
 });
