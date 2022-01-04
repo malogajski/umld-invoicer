@@ -1,6 +1,6 @@
 <div class="flex flex-wrap w-full -mx-3 mb-6">
     <div class="md:w-1/3 px-3">
-        <label for="country_id" class="label">Country</label>
+        <label for="country_id" class="label">Country2</label>
         <select class="select" required name="country_id" id="country_id" wire:model="selectedCountry" wire:change.prevent="changeCountry">
             <option value="">Choose Country</option>
             @foreach ($countries as $country)
